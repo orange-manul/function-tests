@@ -1,10 +1,6 @@
 <?php
 
-use App\Http\Controllers\Post\CreateController;
-use App\Http\Controllers\Post\DestroyController;
-use App\Http\Controllers\Post\EditController;
-use App\Http\Controllers\Post\ShowController;
-use App\Http\Controllers\Post\StoreController;
+
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
@@ -39,9 +35,20 @@ Route::group(['namespace' => 'App\Http\Controllers\Post'], function(){
     Route::delete('/posts/{post}', 'DestroyController')->name('post.delete');    
 });
 
+Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function (){
+    Route::namespace('Post')->group( function (){
+        Route::get('/post', 'IndexController')->name('admin.post.index');
+        Route::get('/posts/create', 'CreateController')->name('admin.post.create');
+        Route::post('/posts', 'StoreController')->name('admin.post.store');
+        Route::get('/posts/{post}', 'ShowController')->name('admin.post.show');
+        Route::get('/posts/{post}/edit', 'EditController')->name('admin.post.edit');
+        Route::patch('/posts/{post}', 'UpdateController')->name('admin.post.update');
+        Route::delete('/posts/{post}', 'DestroyController')->name('admin.post.delete');  
+    });
+});
+
 
 Route::get('about', [AboutController::class, 'about'])->name('about.about');
-
 
 Route::get('contact', [ContactController::class, 'contact'])->name('contact.contact');
 

@@ -9,11 +9,13 @@ class Service
     {
         $tags = $data['tags'];
         unset($data['tags']);
+        
         $post = Post::create($data);
+
         $post->tags()->attach($tags);
     }
 
-    public function update($data, $post)
+    public function update($post, $data)
     {
         $tags = $data['tags'];
         unset($data['tags']);
