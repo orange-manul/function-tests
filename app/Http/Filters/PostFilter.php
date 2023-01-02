@@ -25,18 +25,15 @@ class PostFilter extends AbstractFilter
     public function title(Builder $builder, $value)
     {
         $builder->where('title', 'like', "%{$value}%");
-        dump($builder);
     }
 
     public function description(Builder $builder, $value)
     {
         $builder->where('description', 'like', "%{$value}%");
-        dump($value);
     }
 
     public function categoryId(Builder $builder, $value)
     {
         $builder->where('category_id', $value);
-        dump($value);
     }
 }

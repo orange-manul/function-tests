@@ -4,7 +4,9 @@
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Post'], function(){
     Route::delete('/posts/{post}', 'DestroyController')->name('post.delete');    
 });
 
-Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function (){
+Route::prefix('admin')->namespace('App\Http\Controllers\Admin',)->middleware('admin')->group(function (){
     Route::namespace('Post')->group( function (){
         Route::get('/post', 'IndexController')->name('admin.post.index');
         Route::get('/posts/create', 'CreateController')->name('admin.post.create');
@@ -53,3 +55,9 @@ Route::get('about', [AboutController::class, 'about'])->name('about.about');
 Route::get('contact', [ContactController::class, 'contact'])->name('contact.contact');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+@csrf
         <div>{{ $post->id}}. {{ $post->title }}</div>
         <div>{{ $post->description }}</div>
         <div> 

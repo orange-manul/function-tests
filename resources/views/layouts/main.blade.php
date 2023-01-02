@@ -22,6 +22,11 @@
                     <button type="button" class="btn btn-success">Posts</button></a>
                 <a class="nav-link" href="{{ route('about.about') }}"><button type="button" class="btn btn-secondary">About</button></a>
                 <a class="nav-link" href="{{ route('contact.contact') }}"><button type="button" class="btn btn-info">Contact</button></a>
+                <li>
+                  @can('view', auth()->user())
+                <a class="nav-link" href="{{ route('admin.post.index') }}"><button type="button" class="btn btn-info">Admin</button></a>
+              </li>
+              @endcan
             </div>
             </div>
           </nav>
